@@ -1,0 +1,132 @@
+﻿@{
+    ViewData["Title"] = "Create Account";
+    Layout = "~/Views/Shared/_LayoutAdminPortal.cshtml";
+}
+@model Application.Models.Profile.ProfileViewModel
+    <!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="page-breadcrumb">
+    <div class="row align-items-center">
+        <div class="col-md-6 col-8 align-self-center">
+            <h3 class="page-title mb-0 p-0">Management</h3>
+            <div class="d-flex align-items-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Management</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Create</li>
+
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <!-- Row -->
+    <div class="row">
+        <!-- Column -->
+        <div class="col-lg-2 col-xlg-1 col-md-2"></div>
+
+        <div class="col-lg-8 col-xlg-9 col-md-7">
+            <div class="card" style="height: auto">
+                <div class="card-body">
+                    <form asp-action="Create" id="create-acc-form" class="form-horizontal form-material mx-2">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group container-avt" style="width: 250px; margin-left: 40%">
+                            <div>
+                                <img src="/img/avatar-default-icon.png" id="output" class="rounded-circle image" asp-append-version="true" width=250 height=250 />
+                            </div>
+                            <div class="btn-middle" style="top:25%">
+                                <input asp-for="AccountCreate.UploadAvt" accept="image/*" class="btn rounded-circle middle" placeholder="Change Avatar" onchange="ChangeImg(this); ShowBtnSave()">
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="AccountCreate.FirstName" style="display:inline" class="control-label col-md-12 mb-0"></label><span class="text-danger"> *</span>
+                            <div class="col-md-12">
+                                <input asp-for="AccountCreate.FirstName" class="form-control ps-0 form-control-line label-color" />
+                                <span asp-validation-for="AccountCreate.FirstName" id="Err_FirstName" class="text-danger"></span>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AccountCreate.LastName" style="display:inline" class="control-label col-md-12 mb-0"></label><span class="text-danger"> *</span>
+                            <div class="col-md-12">
+                                <input asp-for="AccountCreate.LastName" class="form-control ps-0 form-control-line label-color" />
+                                <span asp-validation-for="AccountCreate.LastName" id="Err_LastName" class="text-danger"></span>
+
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AccountCreate.Email" style="display:inline" class="control-label col-md-12 mb-0"></label><span class="text-danger"> *</span>
+                            <div class="col-md-12">
+                                <input asp-for="AccountCreate.Email" class="form-control ps-0 form-control-line label-color" />
+                                <span asp-validation-for="AccountCreate.Email" id="Err_Email" class="text-danger"></span>
+                                <span id="EmailExisted" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AccountCreate.Password" style="display:inline" class="control-label col-md-12 mb-0"></label><span class="text-danger"> *</span>
+                            <div class="col-md-12">
+                                <input asp-for="AccountCreate.Password" class="form-control ps-0 form-control-line label-color" />
+                                <span asp-validation-for="AccountCreate.Password" id="Err_Password" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AccountCreate.RoleId" class="control-label col-md-12 mb-0 "></label>
+                            <div class="col-md-12">
+                                <select asp-for="AccountCreate.RoleId" class="form-control label-color">
+                                    <option value="2">Staff</option>
+                                    <option value="1">Admin</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <br />
+                            <input type="submit" value="Create" class="btn btn-info" />
+                            <a asp-action="Index" class="btn btn-outline-secondary">Back</a>
+                            @*<a asp-action="Delete" class="btn btn-outline-danger" onclick="">Delete</a>*@
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Column -->
+    </div>
+    <!-- Row -->
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Right sidebar -->
+    <!-- ============================================================== -->
+    <!-- .right-sidebar -->
+    <!-- ============================================================== -->
+    <!-- End Right sidebar -->
+    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Container fluid  -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- footer -->
+<!-- ============================================================== -->
+<footer class="footer">
+    2021 ©Copyright By Saigon Technology Solution
+</footer>
+<!-- ============================================================== -->
+<!-- End footer -->
+<!-- ============================================================== -->

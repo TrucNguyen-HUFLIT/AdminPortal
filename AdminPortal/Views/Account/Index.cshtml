@@ -1,0 +1,166 @@
+﻿@model Application.Models.Account.AccountViewModel
+@using X.PagedList.Mvc.Core;
+@using Microsoft.AspNetCore.Mvc;
+@{
+    ViewData["Title"] = "Management Accounts";
+    Layout = "~/Views/Shared/_LayoutAdminPortal.cshtml";
+}
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="page-breadcrumb">
+    <div class="row align-items-center">
+        <div class="col-md-6 col-8 align-self-center">
+            <h3 class="page-title mb-0 p-0">Management</h3>
+            <div class="d-flex align-items-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Management Accounts</li>
+
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class="row">
+        <!-- column -->
+        <div class="col-sm-12">
+            <div class="card" style="height: auto">
+                <div class="card-body">
+                    <div style="display:inline">
+                        @using (Html.BeginForm("Index", "Account", FormMethod.Get, new { @style = "float: right; width: 40%" }))
+                        {
+                            <input type="text" id="searchString" name="searchString" placeholder="Find by name or email">
+                            <input type="submit" value="Search" class="btn btn-outline-info" style="margin-bottom:5px" />
+                        }
+                        <a asp-action="Create" style="float:left;" class="btn btn-outline-info">Create</a>
+
+                    </div>
+                    <br /><br /><br />
+
+                                <div style="clear:both" class="table-responsive">
+                                    <table class="table table-bordered" width="100%" cellspacing="0" >
+                                        <thead>
+                                            <tr class="table-success align-middle text-center">
+                                                <th class="border-top-0">
+                                                    @Html.ActionLink("ID", "Index", new { sortOrder = ViewBag.IDSortParm })
+                                                </th>
+                                                <th class="border-top-0">
+                                                    @Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.FirstNameSortParm })
+                                                </th>
+                                                <th class="border-top-0">
+                                                    @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.LastNameSortParm })
+                                                </th>
+                                                <th class="border-top-0">
+                                                    @Html.DisplayNameFor(model => model.AccountRequest.Email)
+                                                </th>
+                                                <th class="border-top-0">
+                                                    @Html.DisplayNameFor(model => model.AccountRequest.Role)
+                                                </th>
+                                                <th class="border-top-0">
+                                                    @Html.DisplayNameFor(model => model.AccountRequest.Avatar)
+                                                </th>
+                                                <th class="border-top-0"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model.ListAccountRequest)
+                                            {
+                                                <tr class="align-middle text-center">
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.AccId)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.FirstName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.LastName)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Email)
+                                                    </td>
+                                                    <td>
+                                                        @if (item.RoleId == 1)
+                                                        {
+                                                            <span>Admin</span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span>Staff</span>
+
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        <img src="@item.Avatar" width="120" class="rounded-circle" />
+                                                    </td>
+                                                    <td>
+                                                        @if (item.RoleId == 1 )
+                                                        {
+                                                            continue;
+                                                        }
+                                                        else
+                                                        {
+                                                            <a asp-action="Edit" asp-route-id="@item.AccId" class="btn btn-outline-warning">Edit</a>
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+
+                                        </tbody>
+                                    </table>
+
+                                    Page @(Model.ListAccountRequest.PageCount < Model.ListAccountRequest.PageNumber ? 0 : Model.ListAccountRequest.PageNumber) of @Model.ListAccountRequest.PageCount
+
+                                    @Html.PagedListPager(Model.ListAccountRequest, page => Url.Action("Index",
+                                        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                                    @*@if (ViewBag.Created != null)
+                                    {
+                                        <div id="toastCreate" class="show" onload="ToastCreate()">Created successfully!</div>
+                                    }*@
+
+
+
+                                </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Right sidebar -->
+    <!-- ============================================================== -->
+    <!-- .right-sidebar -->
+    <!-- ============================================================== -->
+    <!-- End Right sidebar -->
+    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Container fluid  -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- footer -->
+<!-- ============================================================== -->
+<footer class="footer">
+    2021 ©Copyright By Saigon Technology Solution
+</footer>
+<!-- ============================================================== -->
+<!-- End footer -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- End Page wrapper  -->
+<!-- ============================================================== -->

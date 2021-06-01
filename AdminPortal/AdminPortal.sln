@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31129.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminPortal", "AdminPortal.csproj", "{75C503C2-65B1-4FA4-B44D-4FE3740A634C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "..\Application\Application.csproj", "{FB247084-CF95-41BC-9E81-AE99752F4493}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "..\Data\Data.csproj", "{92407696-0FC4-4A79-A0FC-9E0EEA3255F5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{75C503C2-65B1-4FA4-B44D-4FE3740A634C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75C503C2-65B1-4FA4-B44D-4FE3740A634C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75C503C2-65B1-4FA4-B44D-4FE3740A634C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75C503C2-65B1-4FA4-B44D-4FE3740A634C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB247084-CF95-41BC-9E81-AE99752F4493}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB247084-CF95-41BC-9E81-AE99752F4493}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB247084-CF95-41BC-9E81-AE99752F4493}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB247084-CF95-41BC-9E81-AE99752F4493}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92407696-0FC4-4A79-A0FC-9E0EEA3255F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92407696-0FC4-4A79-A0FC-9E0EEA3255F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92407696-0FC4-4A79-A0FC-9E0EEA3255F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92407696-0FC4-4A79-A0FC-9E0EEA3255F5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7C87DCF6-5EE7-451C-8439-6D0B19EE6A35}
+	EndGlobalSection
+EndGlobal

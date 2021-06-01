@@ -1,0 +1,223 @@
+﻿@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_LayoutAdminPortal.cshtml";
+}
+@model Application.Models.Profile.ProfileViewModel
+    <!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="page-breadcrumb">
+    <div class="row align-items-center">
+        <div class="col-md-6 col-8 align-self-center">
+            <h3 class="page-title mb-0 p-0">Profile</h3>
+            <div class="d-flex align-items-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <!-- Row -->
+    <div class="row">
+        <!-- Column -->
+        <div class="col-lg-4 col-xlg-3 col-md-5">
+            <div class="card">
+                <div class="card-body profile-card">
+                    <center class="mt-4">
+                        <form asp-action="ChangeImage" enctype="multipart/form-data" class="form-horizontal form-material mx-2">
+                            <div class="form-group text-center  container-avt">
+                                <div>
+                                    @if (Model.AccountRequest != null)
+                                    {
+                                        <img src="@Model.AccountRequest.Avatar" id="output" class="rounded-circle image " asp-append-version="true" width=250 height=250 />
+                                    }
+                                </div>
+                                <div class="btn-middle">
+                                    <input asp-for="ProfileChangeImage.UploadAvt" accept="image/*" class="btn rounded-circle middle" placeholder="Change Avatar" onchange="ChangeImg(this); ShowBtnSave()">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <input asp-for="ProfileChangeImage.AccId" value="@Model.AccountRequest.AccId" hidden readonly />
+                                </div>
+                                @if (@Model.AccountRequest.FirstName != null && @Model.AccountRequest.FirstName != null)
+                                {
+                            <p class="label-color">@Application.Models.Profile.SessionAcc.Name</p>
+                                }
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <input id="btn-save-img" type="submit" value="Save" class="btn btn-primary" style="display:none" />
+                            </div>
+                        </form>
+                    </center>
+                </div>
+            </div>
+        </div>
+        <!-- Column -->
+        <!-- Column -->
+        <div class="col-lg-6 col-xlg-7 col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    <form asp-action="Index" class="form-horizontal form-material mx-2">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="AccountRequest.AccId" class="control-label col-md-12 mb-0"></label>
+                            <div class="col-md-12">
+                                <label class="form-control ps-0 form-control-line label-color">@Model.AccountRequest.AccId</label>
+                                <input asp-for="AccountRequest.AccId" hidden />
+                            </div>
+                        </div>
+                        <input asp-for="AccountRequest.Avatar" hidden>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-12 mb-0">First Name <span style="display:none" id="requiredFN" class="text-danger">*</span></label>
+                            <div class="col-md-12">
+                                <input asp-for="AccountRequest.FirstName" class="form-control ps-0 form-control-line label-color" onchange="ShowBtnSave_PW_Required()" />
+                                <span asp-validation-for="AccountRequest.FirstName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-12 mb-0">Last Name <span style="display:none" id="requiredLN" class="text-danger">*</span></label>
+                            <div class="col-md-12">
+                                <input asp-for="AccountRequest.LastName" class="form-control ps-0 form-control-line label-color" onchange="ShowBtnSave_PW_Required()" />
+                                <span asp-validation-for="AccountRequest.LastName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AccountRequest.Email" class="control-label col-md-12 mb-0"></label>
+                            <div class="col-md-12">
+                                <label class="form-control ps-0 form-control-line label-color">@Model.AccountRequest.Email</label>
+                                <input asp-for="AccountRequest.Email" hidden />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-12 mb-0 ">Role</label>
+                            <div class="col-md-12">
+                                @if (Model.AccountRequest.RoleId == 1)
+                                {
+                                    <label class="form-control ps-0 form-control-line label-color">Admin</label>
+                                }
+                                else
+                                {
+                                    <label class="form-control ps-0 form-control-line label-color">Staff</label>
+                                }
+                                <input asp-for="AccountRequest.RoleId" hidden>
+                            </div>
+                        </div>
+                        <div class="form-group" id="save_password" style="display: none">
+                            <label asp-for="AccountRequest.Password" class="control-label col-md-12 mb-0"></label>
+                            <div class="col-md-12">
+                                <input name="AccountRequest.Password" class="form-control ps-0 form-control-line" type="password" placeholder="Text password to save" />
+                            </div>
+                            <br />
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-xlg-2 col-md-2">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="text-center label-color" onclick="ShowForm_PW()">Change password</h4>
+                    @if (ViewBag.Done != null)
+                    {
+
+                        <span class="text-success">@ViewBag.Done</span>
+
+                    }
+                    <form asp-action="ChangePassword" id="form-changepassword" enctype="multipart/form-data" style="display: block" class="form-horizontal form-material mx-2">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <input asp-for="ProfileChangePassword.AccId" value="@Model.AccountRequest.AccId" hidden readonly />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ProfileChangePassword.OldPassword" style="display:inline" class="control-label col-md-12 mb-0"></label><span class="text-danger"> *</span>
+                            <div class="col-md-12">
+                                <input asp-for="ProfileChangePassword.OldPassword" class="form-control ps-0 form-control-line" />
+                                <span asp-validation-for="ProfileChangePassword.OldPassword" class="text-danger"></span>
+                                @if (ViewBag.OldPassword != null)
+                                {
+                                    <span class="text-danger">@ViewBag.OldPassword</span>
+                                }
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ProfileChangePassword.Password" style="display:inline" class="control-label col-md-12 mb-0"></label><span class="text-danger"> *</span>
+                            <div class="col-md-12">
+                                <input asp-for="ProfileChangePassword.Password" class="form-control ps-0 form-control-line" />
+                                <span asp-validation-for="ProfileChangePassword.Password" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="ProfileChangePassword.ConfirmPassword" style="display:inline" class="control-label col-md-12 mb-0"></label><span class="text-danger"> *</span>
+                            <div class="col-md-12">
+                                <input asp-for="ProfileChangePassword.ConfirmPassword" class="form-control ps-0 form-control-line" />
+                                <span asp-validation-for="ProfileChangePassword.ConfirmPassword" class="text-danger"></span>
+                            </div>
+                        </div>                            <br />
+                        <div class="form-group">
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Column -->
+    </div>
+    <!-- Row -->
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Right sidebar -->
+    <!-- ============================================================== -->
+    <!-- .right-sidebar -->
+    <!-- ============================================================== -->
+    <!-- End Right sidebar -->
+    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Container fluid  -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- footer -->
+<!-- ============================================================== -->
+<footer class="footer">
+    2021 ©Copyright By Saigon Technology Solution
+</footer>
+<!-- ============================================================== -->
+<!-- End footer -->
+<!-- ============================================================== -->
+@*<script>
+        if (@AdminPortal.Controllers.ProfileController.message == null) { break; }
+        else {alert('aaaaaa');}
+    </script>*@
+
+@section scripts {
+    @if (ViewBag.Done != null)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                ShowForm_PW();
+            });
+        </script>
+    }
+}

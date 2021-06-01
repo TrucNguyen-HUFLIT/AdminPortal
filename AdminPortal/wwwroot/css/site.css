@@ -1,0 +1,158 @@
+﻿
+
+
+/*change Avt*/
+.container-avt:hover .image {
+    opacity: 0.5;
+}
+
+.container-avt:hover .middle {
+    opacity: 1;
+}
+
+.btn-middle {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.middle {
+    margin-bottom: 90px;
+    width: 250px;
+    height: 250px;
+}
+
+.label-color {
+    color: #655e5e;
+    font-weight: 700;
+    font-size: 150%;
+}
+
+.card {
+    height: 650px;
+}
+
+.page-wrapper > .container-fluid, .page-wrapper > .container-lg, .page-wrapper > .container-md, .page-wrapper > .container-sm, .page-wrapper > .container-xl, .page-wrapper > .container-xxl {
+    padding: 30px;
+    min-height: calc(95vh - 180px);
+}
+
+.pagination-container > .pagination > li > a {
+    background-color: #1e88e5;
+    border: none;
+    color: white;
+    height: 30px;
+    padding-top: 3px;
+    width: 30px;
+    text-align: center;
+    margin: 1px;
+    border-radius: 2px;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+}
+
+.pagination-container > .pagination > li > span {
+    background-color: white;
+    border: 1px solid #1e88e5;
+    color: #1e88e5;
+    height: 30px;
+    padding-top: 3px;
+    width: 30px;
+    text-align: center;
+    margin: 1px;
+    border-radius: 2px;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+}
+
+#searchString{
+    width: 80%;
+    height: 35px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 18px;
+    background-color: white;
+    background-image: url('searchicon.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 2px 4px 2px 8px;
+}
+
+
+#toastRegister, #toastDelete, #toastCreate {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+}
+
+    #toastRegister.show, #toastDelete.show, #toastCreate.show {
+        visibility: visible;
+        -webkit-animation: fadein 1s, fadeout 1s 3s;
+        animation: fadein 1s, fadeout 1s 3s;
+    }
+
+@-webkit-keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
+}
+
+@keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeout {
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}}

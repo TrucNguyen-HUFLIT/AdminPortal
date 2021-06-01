@@ -1,0 +1,165 @@
+﻿@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_LayoutAdminPortal.cshtml";
+}
+@model Application.Models.Profile.ProfileViewModel
+    <!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="page-breadcrumb">
+    <div class="row align-items-center">
+        <div class="col-md-6 col-8 align-self-center">
+            <h3 class="page-title mb-0 p-0">Management</h3>
+            <div class="d-flex align-items-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Management</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit</li>
+
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <!-- Row -->
+    <div class="row">
+        <!-- Column -->
+        <div class="col-lg-4 col-xlg-3 col-md-5">
+            <div class="card">
+                <div class="card-body profile-card">
+                    <center class="mt-4">
+                        <form asp-action="ChangeImageEdit" enctype="multipart/form-data" class="form-horizontal form-material mx-2">
+                            <div class="form-group text-center container-avt">
+                                <div>
+                                    @if (Model.AccountEdit != null)
+                                    {
+                                        <img src="@Model.AccountEdit.Avatar" id="output" class="rounded-circle image" asp-append-version="true" width=250 height=250 />
+                                    }
+                                </div>
+                                <div class="btn-middle">
+                                    <input asp-for="ProfileChangeImage.UploadAvt" accept="image/*" class="btn rounded-circle middle" placeholder="Change Avatar" onchange="ChangeImg(this); ShowBtnSave()">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <input asp-for="ProfileChangeImage.AccId" value="@Model.AccountEdit.AccId" hidden readonly />
+                                </div>
+                                @if (@Model.AccountEdit.FirstName != null && @Model.AccountEdit.FirstName != null)
+                                {
+                                    <p class="label-color">@Model.AccountEdit.FirstName @Model.AccountEdit.LastName</p>
+                                }
+                            </div>
+                            <br />
+                            <div class="form-group">
+                                <input id="btn-save-img" type="submit" value="Save" class="btn btn-primary" style="display:none" />
+                            </div>
+                        </form>
+
+                    </center>
+                </div>
+            </div>
+        </div>
+        <!-- Column -->
+        <!-- Column -->
+        <div class="col-lg-8 col-xlg-9 col-md-7">
+            <div class="card">
+                <div class="card-body">
+                    <form asp-action="Edit" id="edit-delete-acc-form" class="form-horizontal form-material mx-2">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="AccountEdit.AccId" class="control-label col-md-12 mb-0"></label>
+                            <div class="col-md-12">
+                                <label class="form-control ps-0 form-control-line label-color">@Model.AccountEdit.AccId</label>
+                                <input asp-for="AccountEdit.AccId" hidden />
+                            </div>
+                        </div>
+                        <input asp-for="AccountEdit.Avatar" hidden>
+
+                        <div class="form-group">
+                            <label asp-for="AccountEdit.FirstName" style="display:inline" class="control-label col-md-12 mb-0"></label><span class="text-danger"> *</span>
+                            <div class="col-md-12">
+                                <input asp-for="AccountEdit.FirstName" class="form-control ps-0 form-control-line label-color" onchange="ShowBtnSave_PW()" />
+                                <span asp-validation-for="AccountEdit.FirstName" id="Err_FirstName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AccountEdit.LastName" style="display:inline" class="control-label col-md-12 mb-0"></label><span class="text-danger"> *</span>
+                            <div class="col-md-12">
+                                <input asp-for="AccountEdit.LastName" class="form-control ps-0 form-control-line label-color" onchange="ShowBtnSave_PW()" />
+                                <span asp-validation-for="AccountEdit.LastName" id="Err_LastName" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AccountEdit.Email" class="control-label col-md-12 mb-0"></label>
+                            <div class="col-md-12">
+                                <label class="form-control ps-0 form-control-line label-color">@Model.AccountEdit.Email</label>
+                                <input asp-for="AccountEdit.Email" hidden />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-12 mb-0 ">Role</label>
+                            <div class="col-md-12">
+                                @if (Model.AccountEdit.RoleId == 1)
+                                {
+                                    <label class="form-control ps-0 form-control-line label-color">Admin</label>
+                                }
+                                else
+                                {
+                                    <label class="form-control ps-0 form-control-line label-color">Staff</label>
+                                }
+                                <input name="AccountEdit.RoleId" value="@Model.AccountEdit.RoleId" hidden class="form-control ps-0 form-control-line label-color" />
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                            <input type="button" value="Delete" class="btn btn-outline-danger" onclick="DeleteAcc()" />
+                            <a asp-action="Index" class="btn btn-outline-secondary">Back</a>
+                            @*<a asp-action="Delete" class="btn btn-outline-danger" onclick="">Delete</a>*@
+                            <div id="toastDelete">Deleted successfully!</div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- Column -->
+    </div>
+    <!-- Row -->
+    <!-- ============================================================== -->
+    <!-- End PAge Content -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Right sidebar -->
+    <!-- ============================================================== -->
+    <!-- .right-sidebar -->
+    <!-- ============================================================== -->
+    <!-- End Right sidebar -->
+    <!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Container fluid  -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- footer -->
+<!-- ============================================================== -->
+<footer class="footer">
+    2021 ©Copyright By Saigon Technology Solution
+</footer>
+<!-- ============================================================== -->
+<!-- End footer -->
+<!-- ============================================================== -->
